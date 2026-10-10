@@ -1,6 +1,6 @@
 # MNIST Digit Recognizer on FPGA
 
-Status: Phase 1 Python complete and verified. Next: SystemVerilog building blocks.
+DISCLAIMER: The initial aspect of training the neural network was done with AI assistance. Everything else is done by hand.
 
 This project implements a binary-input MNIST recognizer for Basys 3. The v1
 model is a 784 to 64 to 10 MLP with hidden ReLU and raw output scores. Python
