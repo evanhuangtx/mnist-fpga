@@ -1,0 +1,1 @@
+PASS: saved CSV contains all 10,000 ordered test images and independently reproduces float correct=9743, integer correct=9742, disagreements=10; confusion matrix total and acceptance checks agree.

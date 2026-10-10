@@ -1,0 +1,10 @@
+test_layer_rom_matches_manual_field_encoding (test_export_mem.MemoryExportTestbench.test_layer_rom_matches_manual_field_encoding) ... ok
+test_malformed_files_and_overflow_are_rejected (test_export_mem.MemoryExportTestbench.test_malformed_files_and_overflow_are_rejected) ... ok
+test_signed_endpoints_and_negative_hex_words (test_export_mem.MemoryExportTestbench.test_signed_endpoints_and_negative_hex_words) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.010s
+
+OK
+
+Memory checks: signed hex endpoints and both manually encoded 128-bit layer records PASS

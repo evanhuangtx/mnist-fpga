@@ -1,0 +1,9 @@
+Float: 97.43% (9743/10000)
+Integer: 97.42% (9742/10000)
+Accuracy drop: 0.01 percentage points; limit=1.00
+Prediction disagreements: 10
+fc1: bound=9,411, observed accumulator=[-2105, 2133], saturated values=0
+fc2: bound=48,495,796, observed accumulator=[-288961, 152170], saturated values=0
+Step 9: PASS
+Report: C:\Users\evank\OneDrive\Documents\ChatGPT\MNIST Digit Recognizer on FPGA_ Spec\docs\quantized_accuracy.json
+Predictions: C:\Users\evank\OneDrive\Documents\ChatGPT\MNIST Digit Recognizer on FPGA_ Spec\docs\test_predictions.csv

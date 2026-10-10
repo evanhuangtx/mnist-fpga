@@ -1,0 +1,11 @@
+test_invalid_parameters_are_rejected_without_clipping (test_quantize.QuantizationTestbench.test_invalid_parameters_are_rejected_without_clipping) ... ok
+test_reachable_intervals_and_smallest_safe_shift (test_quantize.QuantizationTestbench.test_reachable_intervals_and_smallest_safe_shift) ... ok
+test_ties_to_even_and_signed_endpoints (test_quantize.QuantizationTestbench.test_ties_to_even_and_signed_endpoints) ... ok
+test_weight_precision_and_wide_accumulator_bounds (test_quantize.QuantizationTestbench.test_weight_precision_and_wide_accumulator_bounds) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.010s
+
+OK
+
+Quantization checks: rounding, signed endpoints, no clipping, wide overflow bounds, and interval shifts PASS

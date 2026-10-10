@@ -1,0 +1,22 @@
+test_real_mnist_batches (test_model.MNISTIntegrationTestbench.test_real_mnist_batches) ... ok
+test_architecture_and_parameter_counts (test_model.ModelTestbench.test_architecture_and_parameter_counts) ... ok
+test_batch_sizes_and_input_preservation (test_model.ModelTestbench.test_batch_sizes_and_input_preservation) ... ok
+test_cross_entropy_gradients_and_optimizer_step (test_model.ModelTestbench.test_cross_entropy_gradients_and_optimizer_step) ... ok
+test_hand_calculated_scores_and_predictions (test_model.ModelTestbench.test_hand_calculated_scores_and_predictions) ... ok
+test_matches_independent_numpy_reference (test_model.ModelTestbench.test_matches_independent_numpy_reference) ... ok
+test_relu_below_at_and_above_zero (test_model.ModelTestbench.test_relu_below_at_and_above_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.096s
+
+OK
+
+MNIST train: input=(32,784), scores=(32,10), finite loss=2.302847, backward PASS
+
+MNIST test: input=(32,784), scores=(32,10), finite loss=2.298453, backward PASS
+
+Optimizer check: cross-entropy 1.048701 -> 0.959617
+
+Hand calculation: expected=[[-9.0, 9.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0], [0.0, -6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0]] actual=[[-9.0, 9.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0], [0.0, -6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0]]
+
+NumPy reference: all 170 output scores match exactly

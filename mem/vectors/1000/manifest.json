@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "images": 1000,
+  "split": "first N official MNIST test images in original order",
+  "image_indices": [
+    0,
+    999
+  ],
+  "flatten_order": "row then column",
+  "packed_pixel_order": "first pixel is bit 0; 98 payload bytes; no start byte included",
+  "source_integer_checkpoint_sha256": "6a6bc1dab6d8253185c29cb0bd7ecf29b4f234a218dde295c4d48749f1d418a9",
+  "parameter_file_sha256": {
+    "weights.mem": "c7a182694889eb04c4cd47a4eef9ee5275a7f1c282f5602e4aaaabbd960d1a8e",
+    "biases.mem": "55ef90414fc4c0212cf658012a090ca6005602174e35bc9acf92cdc801014597",
+    "shifts.mem": "6c28d50dbac850e6617a3ef20de61f826f23b62439affdb8db1b8d3ed80240b4",
+    "layer_table.mem": "9540d3a57866b46386fce9fd9af2871307a048cf62824f238c580330a2ec09e5",
+    "layers.json": "18b076bcfcbb1311c999ee743fd459bd8410f6d47d8a5951d53fef46eb72997c"
+  },
+  "layers": [
+    {
+      "name": "fc1",
+      "type": "dense",
+      "inputs": 784,
+      "outputs": 64,
+      "weight_base": 0,
+      "bias_base": 0,
+      "relu": true,
+      "input_fractional_bits": 0,
+      "weight_fractional_bits": 7,
+      "accumulator_fractional_bits": 7,
+      "output_fractional_bits": 7,
+      "shift": 0
+    },
+    {
+      "name": "fc2",
+      "type": "dense",
+      "inputs": 64,
+      "outputs": 10,
+      "weight_base": 50176,
+      "bias_base": 64,
+      "relu": false,
+      "input_fractional_bits": 7,
+      "weight_fractional_bits": 6,
+      "accumulator_fractional_bits": 13,
+      "output_fractional_bits": 6,
+      "shift": 7
+    }
+  ],
+  "files": {
+    "images.mem": {
+      "word_bits": 16,
+      "signed": true,
+      "words_per_image": 784,
+      "total_words": 784000,
+      "bytes": 3920000,
+      "sha256": "de580fe464c8425320e224bf6ca21295c204f1fb98deacbc2821661676a6eb80"
+    },
+    "packed_images.mem": {
+      "word_bits": 8,
+      "signed": false,
+      "words_per_image": 98,
+      "total_words": 98000,
+      "bytes": 294000,
+      "sha256": "794e56c8acb64c16fbe418ec4b32a2e2bc31d3fe828dbb08a191f9361bf46d0d"
+    },
+    "hidden.mem": {
+      "word_bits": 16,
+      "signed": true,
+      "words_per_image": 64,
+      "total_words": 64000,
+      "bytes": 320000,
+      "sha256": "b105a11797fab772f1e3b1ff34361146ea96c16522287de54d4f0f5cfec6313d"
+    },
+    "scores.mem": {
+      "word_bits": 16,
+      "signed": true,
+      "words_per_image": 10,
+      "total_words": 10000,
+      "bytes": 50000,
+      "sha256": "dc2340f35477d71cde6893f05bed950de4e9896f3868608e391fdf02dd46f930"
+    },
+    "expected_digits.mem": {
+      "word_bits": 8,
+      "signed": false,
+      "words_per_image": 1,
+      "total_words": 1000,
+      "bytes": 3000,
+      "sha256": "658b305d8bb3af4ee6921b49b484ea00a365e85fd1c7e2fd533611d238d56d01"
+    },
+    "labels.mem": {
+      "word_bits": 8,
+      "signed": false,
+      "words_per_image": 1,
+      "total_words": 1000,
+      "bytes": 3000,
+      "sha256": "6ab55c4ef0a768cd2675066ccffc65ac2ed034609bdfec6a2eeb53a4f3db60c3"
+    }
+  },
+  "reload_exact": true,
+  "packed_payload_round_trip_exact": true,
+  "recomputed_layer_outputs_exact": true
+}

@@ -1,0 +1,1 @@
+PASS: all six shift/saturation/ReLU examples, ties-to-even conversion, scale example, packed pixel order, seven signed hex encodings, signed argmax ties, and trained-model memory dimensions.

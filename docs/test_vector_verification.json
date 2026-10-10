@@ -1,0 +1,35 @@
+{
+  "source_integer_checkpoint_sha256": "6a6bc1dab6d8253185c29cb0bd7ecf29b4f234a218dde295c4d48749f1d418a9",
+  "suites": [
+    {
+      "images": 10,
+      "path": "C:\\Users\\evank\\OneDrive\\Documents\\ChatGPT\\MNIST Digit Recognizer on FPGA_ Spec\\mem\\vectors\\10",
+      "files_verified": 6,
+      "hidden_values_verified": 640,
+      "scores_verified": 100,
+      "digits_verified": 10,
+      "all_checks_passed": true
+    },
+    {
+      "images": 1000,
+      "path": "C:\\Users\\evank\\OneDrive\\Documents\\ChatGPT\\MNIST Digit Recognizer on FPGA_ Spec\\mem\\vectors\\1000",
+      "files_verified": 6,
+      "hidden_values_verified": 64000,
+      "scores_verified": 10000,
+      "digits_verified": 1000,
+      "all_checks_passed": true
+    },
+    {
+      "images": 10000,
+      "path": "C:\\Users\\evank\\OneDrive\\Documents\\ChatGPT\\MNIST Digit Recognizer on FPGA_ Spec\\mem\\vectors\\10000",
+      "files_verified": 6,
+      "hidden_values_verified": 640000,
+      "scores_verified": 100000,
+      "digits_verified": 10000,
+      "all_checks_passed": true
+    }
+  ],
+  "full_test_correct": 9742,
+  "full_test_accuracy": 0.9742,
+  "all_checks_passed": true
+}

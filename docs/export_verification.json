@@ -1,0 +1,36 @@
+{
+  "source_integer_checkpoint_sha256": "6a6bc1dab6d8253185c29cb0bd7ecf29b4f234a218dde295c4d48749f1d418a9",
+  "weight_words": 50816,
+  "bias_words": 74,
+  "layers": 2,
+  "parameter_round_trip_exact": true,
+  "images_checked": 10000,
+  "hidden_values_matched": 640000,
+  "scores_matched": 100000,
+  "digits_matched": 10000,
+  "test_correct": 9742,
+  "test_accuracy": 0.9742,
+  "export_reload_exact": true,
+  "files": {
+    "weights.mem": {
+      "sha256": "c7a182694889eb04c4cd47a4eef9ee5275a7f1c282f5602e4aaaabbd960d1a8e",
+      "bytes": 203264
+    },
+    "biases.mem": {
+      "sha256": "55ef90414fc4c0212cf658012a090ca6005602174e35bc9acf92cdc801014597",
+      "bytes": 740
+    },
+    "shifts.mem": {
+      "sha256": "6c28d50dbac850e6617a3ef20de61f826f23b62439affdb8db1b8d3ed80240b4",
+      "bytes": 8
+    },
+    "layer_table.mem": {
+      "sha256": "9540d3a57866b46386fce9fd9af2871307a048cf62824f238c580330a2ec09e5",
+      "bytes": 68
+    },
+    "layers.json": {
+      "sha256": "18b076bcfcbb1311c999ee743fd459bd8410f6d47d8a5951d53fef46eb72997c",
+      "bytes": 1540
+    }
+  }
+}

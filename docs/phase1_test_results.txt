@@ -1,0 +1,62 @@
+test_counts_are_independent_of_batch_boundaries (test_dead_neurons.HiddenNeuronTestbench.test_counts_are_independent_of_batch_boundaries) ... ok
+test_empty_and_nonfinite_data_are_rejected (test_dead_neurons.HiddenNeuronTestbench.test_empty_and_nonfinite_data_are_rejected) ... ok
+test_known_dead_neurons_and_tiny_positive_activation (test_dead_neurons.HiddenNeuronTestbench.test_known_dead_neurons_and_tiny_positive_activation) ... ok
+test_acceptance_boundary_is_one_percentage_point (test_evaluate_quantized.QuantizedEvaluationTestbench.test_acceptance_boundary_is_one_percentage_point) ... ok
+test_gains_losses_disagreements_and_confusion (test_evaluate_quantized.QuantizedEvaluationTestbench.test_gains_losses_disagreements_and_confusion) ... ok
+test_inconsistent_or_invalid_labels_are_rejected (test_evaluate_quantized.QuantizedEvaluationTestbench.test_inconsistent_or_invalid_labels_are_rejected) ... ok
+test_layer_rom_matches_manual_field_encoding (test_export_mem.MemoryExportTestbench.test_layer_rom_matches_manual_field_encoding) ... ok
+test_malformed_files_and_overflow_are_rejected (test_export_mem.MemoryExportTestbench.test_malformed_files_and_overflow_are_rejected) ... ok
+test_signed_endpoints_and_negative_hex_words (test_export_mem.MemoryExportTestbench.test_signed_endpoints_and_negative_hex_words) ... ok
+test_invalid_pixels_and_vector_files_are_rejected (test_export_vectors.VectorExportTestbench.test_invalid_pixels_and_vector_files_are_rejected) ... ok
+test_pixel_order_byte_boundaries_and_complete_round_trip (test_export_vectors.VectorExportTestbench.test_pixel_order_byte_boundaries_and_complete_round_trip) ... ok
+test_signed_vector_words_and_image_major_order (test_export_vectors.VectorExportTestbench.test_signed_vector_words_and_image_major_order) ... ok
+test_hand_calculated_dense_biases_and_signed_products (test_golden.GoldenTestbench.test_hand_calculated_dense_biases_and_signed_products) ... ok
+test_invalid_inputs_and_scale_configuration_are_rejected (test_golden.GoldenTestbench.test_invalid_inputs_and_scale_configuration_are_rejected) ... ok
+test_prefix_overflow_is_rejected_even_when_final_sum_fits (test_golden.GoldenTestbench.test_prefix_overflow_is_rejected_even_when_final_sum_fits) ... ok
+test_random_dense_matches_sequential_reference (test_golden.GoldenTestbench.test_random_dense_matches_sequential_reference) ... ok
+test_real_mnist_layers_match_sequential_reference (test_golden.GoldenTestbench.test_real_mnist_layers_match_sequential_reference) ... ok
+test_shift_saturation_and_relu_boundaries (test_golden.GoldenTestbench.test_shift_saturation_and_relu_boundaries) ... ok
+test_signed_argmax_ties_choose_lowest_digit (test_golden.GoldenTestbench.test_signed_argmax_ties_choose_lowest_digit) ... ok
+test_real_mnist_batches (test_model.MNISTIntegrationTestbench.test_real_mnist_batches) ... ok
+test_architecture_and_parameter_counts (test_model.ModelTestbench.test_architecture_and_parameter_counts) ... ok
+test_batch_sizes_and_input_preservation (test_model.ModelTestbench.test_batch_sizes_and_input_preservation) ... ok
+test_cross_entropy_gradients_and_optimizer_step (test_model.ModelTestbench.test_cross_entropy_gradients_and_optimizer_step) ... ok
+test_hand_calculated_scores_and_predictions (test_model.ModelTestbench.test_hand_calculated_scores_and_predictions) ... ok
+test_matches_independent_numpy_reference (test_model.ModelTestbench.test_matches_independent_numpy_reference) ... ok
+test_relu_below_at_and_above_zero (test_model.ModelTestbench.test_relu_below_at_and_above_zero) ... ok
+test_invalid_parameters_are_rejected_without_clipping (test_quantize.QuantizationTestbench.test_invalid_parameters_are_rejected_without_clipping) ... ok
+test_reachable_intervals_and_smallest_safe_shift (test_quantize.QuantizationTestbench.test_reachable_intervals_and_smallest_safe_shift) ... ok
+test_ties_to_even_and_signed_endpoints (test_quantize.QuantizationTestbench.test_ties_to_even_and_signed_endpoints) ... ok
+test_weight_precision_and_wide_accumulator_bounds (test_quantize.QuantizationTestbench.test_weight_precision_and_wide_accumulator_bounds) ... ok
+test_evaluation_counts_and_uneven_batches (test_train.TrainingTestbench.test_evaluation_counts_and_uneven_batches) ... ok
+test_nonfinite_scores_are_rejected (test_train.TrainingTestbench.test_nonfinite_scores_are_rejected) ... ok
+test_random_shifts_preserve_binary_pixels_and_use_zero_padding (test_train.TrainingTestbench.test_random_shifts_preserve_binary_pixels_and_use_zero_padding) ... ok
+test_training_loop_learns_simple_binary_examples (test_train.TrainingTestbench.test_training_loop_learns_simple_binary_examples) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.383s
+
+OK
+
+Hidden-neuron check: expected 61 dead / 3 active; exact zero and tiny positive cases PASS
+
+Memory checks: signed hex endpoints and both manually encoded 128-bit layer records PASS
+
+Vector checks: LSB-first packing, first/last pixels, signed scores, image order, and malformed-file rejection PASS
+
+Sequential reference: all 640 hidden values, 100 output scores, and 10 predictions match exactly; every scalar MAC prefix fits int32
+
+MNIST train: input=(32,784), scores=(32,10), finite loss=2.302847, backward PASS
+
+MNIST test: input=(32,784), scores=(32,10), finite loss=2.298453, backward PASS
+
+Optimizer check: cross-entropy 1.048701 -> 0.959617
+
+Hand calculation: expected=[[-9.0, 9.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0], [0.0, -6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0]] actual=[[-9.0, 9.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0], [0.0, -6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0]]
+
+NumPy reference: all 170 output scores match exactly
+
+Quantization checks: rounding, signed endpoints, no clipping, wide overflow bounds, and interval shifts PASS
+
+Training loop: synthetic loss 2.244742 -> 0.001771, accuracy=100%
+PASS: 34 tests and 23 parameter/vector files verified against full-evaluation reports

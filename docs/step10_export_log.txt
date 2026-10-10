@@ -1,0 +1,5 @@
+Exported 50,816 weight words, 74 bias words, 2 shifts, and 2 layer records
+PASS: reloaded parameters match exactly; all 640,000 hidden values, 100,000 scores, and 10,000 digits match
+Reloaded test accuracy: 97.42% (9742/10000)
+Files: C:\Users\evank\OneDrive\Documents\ChatGPT\MNIST Digit Recognizer on FPGA_ Spec\mem
+Verification: C:\Users\evank\OneDrive\Documents\ChatGPT\MNIST Digit Recognizer on FPGA_ Spec\docs\export_verification.json

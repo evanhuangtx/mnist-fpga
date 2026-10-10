@@ -1,0 +1,28 @@
+test_real_mnist_batches (test_model.MNISTIntegrationTestbench.test_real_mnist_batches) ... ok
+test_architecture_and_parameter_counts (test_model.ModelTestbench.test_architecture_and_parameter_counts) ... ok
+test_batch_sizes_and_input_preservation (test_model.ModelTestbench.test_batch_sizes_and_input_preservation) ... ok
+test_cross_entropy_gradients_and_optimizer_step (test_model.ModelTestbench.test_cross_entropy_gradients_and_optimizer_step) ... ok
+test_hand_calculated_scores_and_predictions (test_model.ModelTestbench.test_hand_calculated_scores_and_predictions) ... ok
+test_matches_independent_numpy_reference (test_model.ModelTestbench.test_matches_independent_numpy_reference) ... ok
+test_relu_below_at_and_above_zero (test_model.ModelTestbench.test_relu_below_at_and_above_zero) ... ok
+test_evaluation_counts_and_uneven_batches (test_train.TrainingTestbench.test_evaluation_counts_and_uneven_batches) ... ok
+test_nonfinite_scores_are_rejected (test_train.TrainingTestbench.test_nonfinite_scores_are_rejected) ... ok
+test_random_shifts_preserve_binary_pixels_and_use_zero_padding (test_train.TrainingTestbench.test_random_shifts_preserve_binary_pixels_and_use_zero_padding) ... ok
+test_training_loop_learns_simple_binary_examples (test_train.TrainingTestbench.test_training_loop_learns_simple_binary_examples) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.240s
+
+OK
+
+MNIST train: input=(32,784), scores=(32,10), finite loss=2.302847, backward PASS
+
+MNIST test: input=(32,784), scores=(32,10), finite loss=2.298453, backward PASS
+
+Optimizer check: cross-entropy 1.048701 -> 0.959617
+
+Hand calculation: expected=[[-9.0, 9.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0], [0.0, -6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0]] actual=[[-9.0, 9.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0], [0.0, -6.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -2.0]]
+
+NumPy reference: all 170 output scores match exactly
+
+Training loop: synthetic loss 2.244742 -> 0.001771, accuracy=100%

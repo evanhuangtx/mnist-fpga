@@ -1,0 +1,13 @@
+{
+  "all_checks_passed": true,
+  "unit_tests_run": 34,
+  "unit_test_failures": 0,
+  "unit_test_errors": 0,
+  "artifact_files_hash_verified": 23,
+  "float_checkpoint_sha256": "ec4c50360845f55fd1c4662892f00b456be78227251224137b6d50b82754c3d8",
+  "integer_checkpoint_sha256": "6a6bc1dab6d8253185c29cb0bd7ecf29b4f234a218dde295c4d48749f1d418a9",
+  "float_accuracy": 0.9743,
+  "integer_accuracy": 0.9742,
+  "accuracy_loss_percentage_points": 0.01,
+  "scope": "Fresh complete unit suite and artifact provenance/hash checks; full 10,000-image comparisons are recorded in hash-matched evaluation and export reports."
+}

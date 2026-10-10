@@ -1,0 +1,10 @@
+test_invalid_pixels_and_vector_files_are_rejected (test_export_vectors.VectorExportTestbench.test_invalid_pixels_and_vector_files_are_rejected) ... ok
+test_pixel_order_byte_boundaries_and_complete_round_trip (test_export_vectors.VectorExportTestbench.test_pixel_order_byte_boundaries_and_complete_round_trip) ... ok
+test_signed_vector_words_and_image_major_order (test_export_vectors.VectorExportTestbench.test_signed_vector_words_and_image_major_order) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.011s
+
+OK
+
+Vector checks: LSB-first packing, first/last pixels, signed scores, image order, and malformed-file rejection PASS

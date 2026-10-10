@@ -1,0 +1,14 @@
+test_hand_calculated_dense_biases_and_signed_products (test_golden.GoldenTestbench.test_hand_calculated_dense_biases_and_signed_products) ... ok
+test_invalid_inputs_and_scale_configuration_are_rejected (test_golden.GoldenTestbench.test_invalid_inputs_and_scale_configuration_are_rejected) ... ok
+test_prefix_overflow_is_rejected_even_when_final_sum_fits (test_golden.GoldenTestbench.test_prefix_overflow_is_rejected_even_when_final_sum_fits) ... ok
+test_random_dense_matches_sequential_reference (test_golden.GoldenTestbench.test_random_dense_matches_sequential_reference) ... ok
+test_real_mnist_layers_match_sequential_reference (test_golden.GoldenTestbench.test_real_mnist_layers_match_sequential_reference) ... ok
+test_shift_saturation_and_relu_boundaries (test_golden.GoldenTestbench.test_shift_saturation_and_relu_boundaries) ... ok
+test_signed_argmax_ties_choose_lowest_digit (test_golden.GoldenTestbench.test_signed_argmax_ties_choose_lowest_digit) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.115s
+
+OK
+
+Sequential reference: all 640 hidden values, 100 output scores, and 10 predictions match exactly; every scalar MAC prefix fits int32

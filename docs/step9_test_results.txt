@@ -1,0 +1,8 @@
+test_acceptance_boundary_is_one_percentage_point (test_evaluate_quantized.QuantizedEvaluationTestbench.test_acceptance_boundary_is_one_percentage_point) ... ok
+test_gains_losses_disagreements_and_confusion (test_evaluate_quantized.QuantizedEvaluationTestbench.test_gains_losses_disagreements_and_confusion) ... ok
+test_inconsistent_or_invalid_labels_are_rejected (test_evaluate_quantized.QuantizedEvaluationTestbench.test_inconsistent_or_invalid_labels_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

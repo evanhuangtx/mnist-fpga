@@ -1,0 +1,4 @@
+# Preserve exact bytes: verified export and checkpoint hashes must survive checkout.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Generated ROM/vector files are reviewed through their layout and verification reports.
+*.mem -diff

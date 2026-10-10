@@ -1,0 +1,45 @@
+Epoch 01/40: train=86.72% val=91.58% loss=0.2968
+Epoch 02/40: train=93.03% val=93.00% loss=0.2348
+Epoch 03/40: train=94.51% val=94.06% loss=0.2021
+Epoch 04/40: train=95.45% val=94.66% loss=0.1801
+Epoch 05/40: train=96.05% val=95.34% loss=0.1628
+Epoch 06/40: train=96.65% val=95.40% loss=0.1509
+Epoch 07/40: train=97.08% val=95.64% loss=0.1439
+Epoch 08/40: train=97.45% val=96.30% loss=0.1353
+Epoch 09/40: train=97.77% val=95.94% loss=0.1369
+Epoch 10/40: train=97.93% val=96.30% loss=0.1311
+Epoch 11/40: train=98.13% val=96.30% loss=0.1243
+Epoch 12/40: train=98.29% val=96.42% loss=0.1253
+Epoch 13/40: train=98.53% val=96.42% loss=0.1234
+Epoch 14/40: train=98.61% val=96.62% loss=0.1192
+Epoch 15/40: train=98.76% val=96.46% loss=0.1234
+Epoch 16/40: train=98.89% val=96.48% loss=0.1176
+Epoch 17/40: train=99.04% val=96.54% loss=0.1162
+Epoch 18/40: train=99.13% val=96.62% loss=0.1153
+Epoch 19/40: train=99.23% val=96.42% loss=0.1177
+Epoch 20/40: train=99.29% val=96.62% loss=0.1164
+Epoch 21/40: train=99.40% val=96.50% loss=0.1174
+Epoch 22/40: train=99.43% val=96.72% loss=0.1158
+Epoch 23/40: train=99.50% val=96.42% loss=0.1151
+Epoch 24/40: train=99.51% val=96.48% loss=0.1165
+Epoch 25/40: train=99.60% val=96.58% loss=0.1167
+Epoch 26/40: train=99.62% val=96.66% loss=0.1211
+Epoch 27/40: train=99.68% val=96.56% loss=0.1160
+Epoch 28/40: train=99.71% val=96.46% loss=0.1188
+Epoch 29/40: train=99.73% val=96.60% loss=0.1183
+Epoch 30/40: train=99.75% val=96.52% loss=0.1170
+Epoch 31/40: train=99.77% val=96.54% loss=0.1160
+Epoch 32/40: train=99.78% val=96.60% loss=0.1174
+Epoch 33/40: train=99.79% val=96.44% loss=0.1165
+Epoch 34/40: train=99.83% val=96.48% loss=0.1186
+Epoch 35/40: train=99.85% val=96.56% loss=0.1180
+Epoch 36/40: train=99.83% val=96.56% loss=0.1178
+Epoch 37/40: train=99.86% val=96.60% loss=0.1162
+Epoch 38/40: train=99.86% val=96.46% loss=0.1171
+Epoch 39/40: train=99.86% val=96.58% loss=0.1183
+Epoch 40/40: train=99.87% val=96.52% loss=0.1176
+Selected epoch: 22
+Test accuracy: 96.87% (9687/10000)
+97% target: NOT MET
+Checkpoint: C:\Users\evank\OneDrive\Documents\ChatGPT\MNIST Digit Recognizer on FPGA_ Spec\artifacts\mlp_float.pt
+Results: C:\Users\evank\OneDrive\Documents\ChatGPT\MNIST Digit Recognizer on FPGA_ Spec\docs\training_results.json

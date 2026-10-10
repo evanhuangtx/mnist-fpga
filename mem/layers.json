@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "source_integer_checkpoint_sha256": "6a6bc1dab6d8253185c29cb0bd7ecf29b4f234a218dde295c4d48749f1d418a9",
+  "weight_words": 50816,
+  "bias_words": 74,
+  "weight_word_bits": 8,
+  "bias_word_bits": 32,
+  "layer_table_word_bits": 128,
+  "layer_table_fields_msb_first": [
+    [
+      "type",
+      8
+    ],
+    [
+      "inputs",
+      16
+    ],
+    [
+      "outputs",
+      16
+    ],
+    [
+      "weight_base",
+      32
+    ],
+    [
+      "bias_base",
+      32
+    ],
+    [
+      "shift",
+      8
+    ],
+    [
+      "flags",
+      8
+    ],
+    [
+      "reserved",
+      8
+    ]
+  ],
+  "type_codes": {
+    "dense": 0
+  },
+  "flags": {
+    "bit_0": "ReLU"
+  },
+  "weight_order": "output neuron then input index",
+  "pixel_order": "row-major, packed bit 0 first",
+  "layers": [
+    {
+      "name": "fc1",
+      "type": "dense",
+      "inputs": 784,
+      "outputs": 64,
+      "weight_base": 0,
+      "bias_base": 0,
+      "relu": true,
+      "input_fractional_bits": 0,
+      "weight_fractional_bits": 7,
+      "accumulator_fractional_bits": 7,
+      "output_fractional_bits": 7,
+      "shift": 0
+    },
+    {
+      "name": "fc2",
+      "type": "dense",
+      "inputs": 64,
+      "outputs": 10,
+      "weight_base": 50176,
+      "bias_base": 64,
+      "relu": false,
+      "input_fractional_bits": 7,
+      "weight_fractional_bits": 6,
+      "accumulator_fractional_bits": 13,
+      "output_fractional_bits": 6,
+      "shift": 7
+    }
+  ]
+}

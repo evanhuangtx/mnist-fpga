@@ -1,0 +1,1 @@
+PASS: saved checkpoint reloads strictly, matches recorded settings and validation selection, and independently scores 9743/10000 (97.43%) using 256-image batches.

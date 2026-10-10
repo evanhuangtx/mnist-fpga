@@ -1,0 +1,10 @@
+test_counts_are_independent_of_batch_boundaries (test_dead_neurons.HiddenNeuronTestbench.test_counts_are_independent_of_batch_boundaries) ... ok
+test_empty_and_nonfinite_data_are_rejected (test_dead_neurons.HiddenNeuronTestbench.test_empty_and_nonfinite_data_are_rejected) ... ok
+test_known_dead_neurons_and_tiny_positive_activation (test_dead_neurons.HiddenNeuronTestbench.test_known_dead_neurons_and_tiny_positive_activation) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.017s
+
+OK
+
+Hidden-neuron check: expected 61 dead / 3 active; exact zero and tiny positive cases PASS

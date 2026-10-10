@@ -1,0 +1,168 @@
+{
+  "split": "all 10,000 official MNIST test images, unchanged original order",
+  "binarization": "raw pixel >= 128",
+  "batch_size": 256,
+  "float_checkpoint_sha256": "ec4c50360845f55fd1c4662892f00b456be78227251224137b6d50b82754c3d8",
+  "integer_checkpoint_sha256": "6a6bc1dab6d8253185c29cb0bd7ecf29b4f234a218dde295c4d48749f1d418a9",
+  "summary": {
+    "images": 10000,
+    "float_correct": 9743,
+    "integer_correct": 9742,
+    "float_accuracy": 0.9743,
+    "integer_accuracy": 0.9742,
+    "accuracy_drop_percentage_points": 0.01,
+    "maximum_allowed_drop_percentage_points": 1.0,
+    "within_one_percentage_point": true,
+    "float_target_met": true,
+    "integer_at_least_97_percent": true,
+    "prediction_disagreements": 10,
+    "float_correct_integer_wrong": 5,
+    "float_wrong_integer_correct": 4,
+    "integer_confusion_matrix_rows_true_columns_predicted": [
+      [
+        966,
+        0,
+        2,
+        1,
+        0,
+        0,
+        4,
+        3,
+        3,
+        1
+      ],
+      [
+        0,
+        1125,
+        4,
+        0,
+        1,
+        0,
+        1,
+        1,
+        3,
+        0
+      ],
+      [
+        5,
+        1,
+        1008,
+        1,
+        2,
+        1,
+        1,
+        2,
+        11,
+        0
+      ],
+      [
+        2,
+        0,
+        7,
+        977,
+        0,
+        8,
+        0,
+        5,
+        5,
+        6
+      ],
+      [
+        0,
+        1,
+        1,
+        0,
+        963,
+        0,
+        3,
+        1,
+        0,
+        13
+      ],
+      [
+        2,
+        1,
+        1,
+        10,
+        1,
+        866,
+        2,
+        1,
+        4,
+        4
+      ],
+      [
+        6,
+        3,
+        2,
+        0,
+        5,
+        2,
+        939,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        5,
+        9,
+        2,
+        1,
+        0,
+        0,
+        994,
+        4,
+        12
+      ],
+      [
+        3,
+        1,
+        3,
+        4,
+        3,
+        4,
+        6,
+        3,
+        940,
+        7
+      ],
+      [
+        0,
+        5,
+        1,
+        12,
+        9,
+        4,
+        0,
+        6,
+        8,
+        964
+      ]
+    ]
+  },
+  "layers": [
+    {
+      "name": "fc1",
+      "max_conservative_absolute_bound": 9411,
+      "every_mac_prefix_fits_int32": true,
+      "observed_accumulator_min": -2105,
+      "observed_accumulator_max": 2133,
+      "observed_output_min": 0,
+      "observed_output_max": 2133,
+      "saturated_values": 0
+    },
+    {
+      "name": "fc2",
+      "max_conservative_absolute_bound": 48495796,
+      "every_mac_prefix_fits_int32": true,
+      "observed_accumulator_min": -288961,
+      "observed_accumulator_max": 152170,
+      "observed_output_min": -2258,
+      "observed_output_max": 1188,
+      "saturated_values": 0
+    }
+  ],
+  "overflow_checks_passed": true,
+  "step9_passed": true
+}
