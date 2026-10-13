@@ -1,4 +1,4 @@
-// Code your design here
+`timescale 1ns/1ps
 module mac (
     input  logic clk,
   input  logic reset,
@@ -16,11 +16,13 @@ module mac (
   assign product = weight * activation;
   assign extended_product = {{8{product[23]}},product};
   
-  always@(posedge clk) begin
+  always_ff @(posedge clk) begin
     
     if(reset) accumulator <= 32'sd0;
-    else if(load_bias) accumulator <= bias;
-    else if(accumulation_enable)accumulator <= accumulator + extended_product;
+    else if(accumulation_enable) begin
+      if(load_bias) accumulator <= bias + extended_product;
+      else accumulator <= accumulator + extended_product;
+    end
     
   end
 
