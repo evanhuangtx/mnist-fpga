@@ -1,0 +1,53 @@
+{
+  "lanes": 8,
+  "weight_word_bits": 64,
+  "bias_word_bits": 256,
+  "weight_words": 6400,
+  "bias_words": 10,
+  "lane_order": "lane 0 in least significant bits",
+  "layers": [
+    {
+      "name": "fc1",
+      "inputs": 784,
+      "outputs": 64,
+      "groups": 8,
+      "weight_base": 0,
+      "bias_base": 0,
+      "shift": 0,
+      "relu": true
+    },
+    {
+      "name": "fc2",
+      "inputs": 64,
+      "outputs": 10,
+      "groups": 2,
+      "weight_base": 6272,
+      "bias_base": 8,
+      "shift": 7,
+      "relu": false
+    }
+  ],
+  "source_integer_checkpoint_sha256": "6a6bc1dab6d8253185c29cb0bd7ecf29b4f234a218dde295c4d48749f1d418a9",
+  "parameter_round_trip_exact": true,
+  "padding_zero": true,
+  "images_checked": 10000,
+  "inference_exact": true,
+  "files": {
+    "weights_x8.mem": {
+      "sha256": "f274005100949e6e55f55213192794ae847909e8a40f3c322416e71d8ad8c354",
+      "bytes": 115200
+    },
+    "biases_x8.mem": {
+      "sha256": "1bba9986c0df4ad38011f1c5329e51821f7c2d3b0dce60154c806631792b78cc",
+      "bytes": 660
+    },
+    "layers_x8.json": {
+      "sha256": "3aa55b87f5d97c553e988f893d65faa46927aa703799e6069de1f6f5172828e0",
+      "bytes": 571
+    },
+    "params.vh": {
+      "sha256": "c98cf383acd898282946576e15d9b741b2bce8bb8ad02e466c9378b8cd800882",
+      "bytes": 250
+    }
+  }
+}

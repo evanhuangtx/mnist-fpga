@@ -1,0 +1,30 @@
+{
+  "lanes": 8,
+  "weight_word_bits": 64,
+  "bias_word_bits": 256,
+  "weight_words": 6400,
+  "bias_words": 10,
+  "lane_order": "lane 0 in least significant bits",
+  "layers": [
+    {
+      "name": "fc1",
+      "inputs": 784,
+      "outputs": 64,
+      "groups": 8,
+      "weight_base": 0,
+      "bias_base": 0,
+      "shift": 0,
+      "relu": true
+    },
+    {
+      "name": "fc2",
+      "inputs": 64,
+      "outputs": 10,
+      "groups": 2,
+      "weight_base": 6272,
+      "bias_base": 8,
+      "shift": 7,
+      "relu": false
+    }
+  ]
+}

@@ -1,5 +1,3 @@
-"""Export hardware ROM files and verify reloaded outputs on all MNIST test images."""
-
 import argparse
 import hashlib
 import json
@@ -13,13 +11,11 @@ from torchvision.datasets import MNIST
 from data import DATA_ROOT, PROJECT_ROOT
 from golden import IntegerMLP
 
-# MSB first; the last byte is reserved and must be zero.
 LAYER_FIELDS = [('type', 8), ('inputs', 16), ('outputs', 16), ('weight_base', 32),
                 ('bias_base', 32), ('shift', 8), ('flags', 8), ('reserved', 8)]
 LAYER_KEYS = ('name', 'type', 'inputs', 'outputs', 'weight_base', 'bias_base', 'relu',
               'input_fractional_bits', 'weight_fractional_bits',
               'accumulator_fractional_bits', 'output_fractional_bits', 'shift')
-
 
 def write_words(path: Path, values, width: int, signed: bool) -> None:
     if width <= 0 or width % 4:
@@ -33,7 +29,6 @@ def write_words(path: Path, values, width: int, signed: bool) -> None:
         lines.append(f'{int(value) & ((1 << width) - 1):0{width // 4}x}')
     path.write_text('\n'.join(lines) + '\n', encoding='ascii')
 
-
 def read_words(path: Path, width: int, signed: bool, count: int) -> list[int]:
     if width <= 0 or width % 4:
         raise ValueError('Word width must be a positive multiple of four')
@@ -44,7 +39,6 @@ def read_words(path: Path, width: int, signed: bool, count: int) -> list[int]:
     if signed:
         words = [word - (1 << width) if word & (1 << (width - 1)) else word for word in words]
     return words
-
 
 def encode_layer(layer: dict) -> int:
     if layer['type'] != 'dense':
@@ -58,6 +52,66 @@ def encode_layer(layer: dict) -> int:
         word = (word << width) | value
     return word
 
+def export_parallel(directory: Path, artifact: dict, lanes: int = 8) -> dict:
+    if lanes < 1 or lanes & (lanes - 1):
+        raise ValueError('Lane count must be a positive power of two')
+    weight_words, bias_words, records = [], [], []
+    restored = {}
+    for layer in artifact['layers']:
+        name = layer['name']
+        weight = artifact['integer_state_dict'][name + '.weight'].numpy()
+        bias = artifact['integer_state_dict'][name + '.bias'].numpy()
+        outputs, inputs = weight.shape
+        groups = (outputs + lanes - 1) // lanes
+        padded = groups * lanes
+        record = {'name': name, 'inputs': inputs, 'outputs': outputs,
+                  'groups': groups, 'weight_base': len(weight_words),
+                  'bias_base': len(bias_words), 'shift': layer['shift'],
+                  'relu': layer['relu']}
+        records.append(record)
+        w = np.pad(weight, ((0, padded - outputs), (0, 0)))
+        b = np.pad(bias, (0, padded - outputs))
+        w = w.reshape(groups, lanes, inputs).transpose(0, 2, 1).reshape(-1, lanes)
+        b = b.reshape(groups, lanes)
+        for row in w:
+            weight_words.append(sum((int(value) & 255) << (8 * k) for k, value in enumerate(row)))
+        for row in b:
+            bias_words.append(sum((int(value) & 0xffffffff) << (32 * k) for k, value in enumerate(row)))
+    directory.mkdir(parents=True, exist_ok=True)
+    write_words(directory / 'weights_x8.mem', weight_words, lanes * 8, False)
+    write_words(directory / 'biases_x8.mem', bias_words, lanes * 32, False)
+    weights = read_words(directory / 'weights_x8.mem', lanes * 8, False, len(weight_words))
+    biases = read_words(directory / 'biases_x8.mem', lanes * 32, False, len(bias_words))
+    def unpack(words, bits):
+        mask, sign = (1 << bits) - 1, 1 << (bits - 1)
+        return np.array([[((word >> (k * bits)) & mask) -
+                         ((1 << bits) if ((word >> (k * bits)) & sign) else 0)
+                         for k in range(lanes)] for word in words], dtype=np.int64)
+    for record in records:
+        name, inputs, outputs, groups = (record[k] for k in ('name', 'inputs', 'outputs', 'groups'))
+        wb, bb = record['weight_base'], record['bias_base']
+        w = unpack(weights[wb:wb + groups * inputs], 8)
+        w = w.reshape(groups, inputs, lanes).transpose(0, 2, 1).reshape(groups * lanes, inputs)
+        b = unpack(biases[bb:bb + groups], 32).reshape(-1)
+        if np.any(w[outputs:]) or np.any(b[outputs:]):
+            raise AssertionError('Padding lanes must be zero')
+        restored[name + '.weight'] = torch.from_numpy(w[:outputs].astype(np.int8))
+        restored[name + '.bias'] = torch.from_numpy(b[:outputs].astype(np.int32))
+        for suffix in ('.weight', '.bias'):
+            if not torch.equal(restored[name + suffix], artifact['integer_state_dict'][name + suffix]):
+                raise AssertionError('Packed parameters differ: ' + name + suffix)
+    config = {'lanes': lanes, 'weight_word_bits': lanes * 8, 'bias_word_bits': lanes * 32,
+              'weight_words': len(weights), 'bias_words': len(biases),
+              'lane_order': 'lane 0 in least significant bits', 'layers': records}
+    (directory / 'layers_x8.json').write_text(json.dumps(config, indent=2) + '\n', encoding='utf-8')
+    params = [f'localparam integer LANES = {lanes};',
+              f'localparam integer W8_DEPTH = {len(weights)};',
+              f'localparam integer B8_DEPTH = {len(biases)};']
+    for index, record in enumerate(records):
+        params.extend([f"localparam integer W8_BASE_L{index} = {record['weight_base']};",
+                       f"localparam integer B8_BASE_L{index} = {record['bias_base']};"])
+    (directory / 'params.vh').write_text('\n'.join(params) + '\n', encoding='ascii')
+    return {'config': config, 'artifact': {'integer_state_dict': restored, 'layers': artifact['layers']}}
 
 def decode_layer(word: int) -> dict:
     if type(word) is not int or not 0 <= word < (1 << 128):
@@ -71,7 +125,6 @@ def decode_layer(word: int) -> dict:
     return {'type': 'dense', 'inputs': fields['inputs'], 'outputs': fields['outputs'],
             'weight_base': fields['weight_base'], 'bias_base': fields['bias_base'],
             'shift': fields['shift'], 'relu': bool(fields['flags'])}
-
 
 def load_exports(directory: Path) -> dict:
     config = json.loads((directory / 'layers.json').read_text(encoding='utf-8'))
@@ -97,9 +150,8 @@ def load_exports(directory: Path) -> dict:
         state[f"{layer['name']}.weight"] = torch.from_numpy(w)
         state[f"{layer['name']}.bias"] = torch.from_numpy(b)
     artifact = {'integer_state_dict': state, 'layers': layers}
-    IntegerMLP(artifact)  # Validate architecture, bases, shapes, and scale consistency.
+    IntegerMLP(artifact)  
     return artifact
-
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -114,6 +166,8 @@ def main() -> None:
         raise ValueError('The checkpoint must match the passing step-9 evaluation')
     artifact = torch.load(args.checkpoint, map_location='cpu', weights_only=True)
     original_model = IntegerMLP(artifact)
+    parallel = export_parallel(args.output_dir, artifact)
+    parallel_model = IntegerMLP(parallel['artifact'])
     layers = [{key: layer[key] for key in LAYER_KEYS} for layer in artifact['layers']]
     weights, biases = [], []
     for layer in layers:
@@ -148,8 +202,10 @@ def main() -> None:
         batch = images[offset:offset + 256]
         expected = original_model.infer(batch)
         actual = restored_model.infer(batch)
+        parallel_actual = parallel_model.infer(batch)
         for key in ('hidden', 'scores', 'digits'):
             np.testing.assert_array_equal(actual[key], expected[key])
+            np.testing.assert_array_equal(parallel_actual[key], expected[key])
         correct += int((actual['digits'] == raw.targets[offset:offset + len(batch)].numpy()).sum())
     if correct != accuracy['summary']['integer_correct']:
         raise AssertionError('Reloaded exports disagree with step-9 accuracy')
@@ -163,11 +219,17 @@ def main() -> None:
                                'bytes': (args.output_dir / name).stat().st_size} for name in filenames}}
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+    parallel_files = ('weights_x8.mem', 'biases_x8.mem', 'layers_x8.json', 'params.vh')
+    parallel_report = {**parallel['config'], 'source_integer_checkpoint_sha256': checkpoint_hash,
+                       'parameter_round_trip_exact': True, 'padding_zero': True,
+                       'images_checked': 10000, 'inference_exact': True,
+                       'files': {name: {'sha256': hashlib.sha256((args.output_dir / name).read_bytes()).hexdigest(),
+                                        'bytes': (args.output_dir / name).stat().st_size} for name in parallel_files}}
+    (args.report.parent / 'parallel_export_verification.json').write_text(json.dumps(parallel_report, indent=2) + '\n', encoding='utf-8')
     print(f'Exported {len(weights):,} weight words, {len(biases)} bias words, 2 shifts, and 2 layer records')
     print('PASS: reloaded parameters match exactly; all 640,000 hidden values, 100,000 scores, and 10,000 digits match')
     print(f'Reloaded test accuracy: {correct / 10000:.2%} ({correct}/10000)')
     print(f'Files: {args.output_dir}\nVerification: {args.report}')
-
 
 if __name__ == '__main__':
     main()

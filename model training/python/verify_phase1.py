@@ -1,5 +1,3 @@
-"""Verify the Phase 1 test suite and provenance of all committed artifacts."""
-
 import json
 import sys
 import unittest
@@ -9,7 +7,6 @@ import torch
 
 from data import PROJECT_ROOT
 from export_vectors import file_hash
-
 
 def main() -> None:
     suite = unittest.defaultTestLoader.discover(str(Path(__file__).resolve().parent), pattern='test_*.py')
@@ -36,6 +33,17 @@ def main() -> None:
         if file_hash(PROJECT_ROOT / 'mem' / name) != metadata['sha256']:
             raise ValueError(f'Parameter file hash mismatch: {name}')
     files_checked = len(exports['files'])
+    parallel_path = PROJECT_ROOT / 'docs' / 'parallel_export_verification.json'
+    if parallel_path.exists():
+        parallel = json.loads(parallel_path.read_text(encoding='utf-8'))
+        if (parallel['source_integer_checkpoint_sha256'] != integer_hash or
+                not all(parallel[key] for key in ('parameter_round_trip_exact', 'padding_zero', 'inference_exact'))):
+            raise ValueError('Parallel export verification failed')
+        for name, metadata in parallel['files'].items():
+            path = PROJECT_ROOT / 'mem' / name
+            if file_hash(path) != metadata['sha256'] or path.stat().st_size != metadata['bytes']:
+                raise ValueError('Parallel export hash or size mismatch: ' + name)
+            files_checked += 1
     for count in (10, 1000, 10000):
         directory = PROJECT_ROOT / 'mem' / 'vectors' / str(count)
         manifest = json.loads((directory / 'manifest.json').read_text(encoding='utf-8'))
@@ -64,7 +72,6 @@ def main() -> None:
     }
     (PROJECT_ROOT / 'docs' / 'phase1_verification.json').write_text(json.dumps(verification, indent=2) + '\n', encoding='utf-8')
     print(f'PASS: {result.testsRun} tests and {files_checked} parameter/vector files verified against full-evaluation reports')
-
 
 if __name__ == '__main__':
     main()
