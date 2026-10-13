@@ -74,8 +74,8 @@ layer with its expected values before checking the predicted digit.
 From the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe python\export_vectors.py
-.\.venv\Scripts\python.exe -m unittest discover -s python -p test_export_vectors.py -v
+.\.venv\Scripts\python.exe "model training\python\export_vectors.py"
+.\.venv\Scripts\python.exe -m unittest discover -s "model training\python" -p test_export_vectors.py -v
 ```
 
 Generation loads the hardware parameter exports and checks their hashes against

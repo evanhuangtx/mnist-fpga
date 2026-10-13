@@ -20,7 +20,7 @@ for i in range(1,10):
     if scores[i] > scores[best]:
         best = i
 assert best == 1
-checkpoint = torch.load('artifacts/mlp_float.pt', map_location='cpu', weights_only=True)
+checkpoint = torch.load(Path(__file__).resolve().parents[1] / 'artifacts' / 'mlp_float.pt', map_location='cpu', weights_only=True)
 model = MNISTMLP()
 model.load_state_dict(checkpoint['model_state_dict'])
 assert model.fc1.weight.numel() == 50176 and model.fc2.weight.numel() == 640

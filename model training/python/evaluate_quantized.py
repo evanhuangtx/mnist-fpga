@@ -45,8 +45,8 @@ def summarize_predictions(labels, float_digits, integer_digits) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--float-checkpoint', type=Path, default=PROJECT_ROOT / 'artifacts' / 'mlp_float.pt')
-    parser.add_argument('--integer-checkpoint', type=Path, default=PROJECT_ROOT / 'artifacts' / 'mlp_quantized.pt')
+    parser.add_argument('--float-checkpoint', type=Path, default=PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_float.pt')
+    parser.add_argument('--integer-checkpoint', type=Path, default=PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_quantized.pt')
     parser.add_argument('--batch-size', type=int, default=256)
     parser.add_argument('--output', type=Path, default=PROJECT_ROOT / 'docs' / 'quantized_accuracy.json')
     parser.add_argument('--predictions', type=Path, default=PROJECT_ROOT / 'docs' / 'test_predictions.csv')

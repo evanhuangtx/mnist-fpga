@@ -67,8 +67,8 @@ def choose_output_fraction(lower: torch.Tensor, upper: torch.Tensor,
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkpoint", type=Path, default=PROJECT_ROOT / "artifacts" / "mlp_float.pt")
-    parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "artifacts" / "mlp_quantized.pt")
+    parser.add_argument("--checkpoint", type=Path, default=PROJECT_ROOT / "model training" / "artifacts" / "mlp_float.pt")
+    parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "model training" / "artifacts" / "mlp_quantized.pt")
     parser.add_argument("--report", type=Path, default=PROJECT_ROOT / "docs" / "quantization_results.json")
     args = parser.parse_args()
     checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=True)

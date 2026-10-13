@@ -12,16 +12,16 @@ from export_vectors import file_hash
 
 
 def main() -> None:
-    suite = unittest.defaultTestLoader.discover(str(PROJECT_ROOT / 'python'), pattern='test_*.py')
+    suite = unittest.defaultTestLoader.discover(str(Path(__file__).resolve().parent), pattern='test_*.py')
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     if not result.wasSuccessful():
         raise SystemExit(1)
     def report(name):
         return json.loads((PROJECT_ROOT / 'docs' / name).read_text(encoding='utf-8'))
 
-    float_hash = file_hash(PROJECT_ROOT / 'artifacts' / 'mlp_float.pt')
-    integer_hash = file_hash(PROJECT_ROOT / 'artifacts' / 'mlp_quantized.pt')
-    integer = torch.load(PROJECT_ROOT / 'artifacts' / 'mlp_quantized.pt', map_location='cpu', weights_only=True)
+    float_hash = file_hash(PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_float.pt')
+    integer_hash = file_hash(PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_quantized.pt')
+    integer = torch.load(PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_quantized.pt', map_location='cpu', weights_only=True)
     accuracy = report('quantized_accuracy.json')
     exports = report('export_verification.json')
     vectors = report('test_vector_verification.json')

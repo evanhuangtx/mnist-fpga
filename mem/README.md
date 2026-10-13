@@ -71,8 +71,8 @@ Its values match the shifts packed in the layer table.
 From the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe python\export_mem.py
-.\.venv\Scripts\python.exe -m unittest discover -s python -p test_export_mem.py -v
+.\.venv\Scripts\python.exe "model training\python\export_mem.py"
+.\.venv\Scripts\python.exe -m unittest discover -s "model training\python" -p test_export_mem.py -v
 ```
 
 Regeneration requires the quantized checkpoint and its passing step-9 accuracy

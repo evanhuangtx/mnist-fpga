@@ -81,7 +81,7 @@ class IntegerMLP:
             incoming_fraction = fo
 
     @classmethod
-    def load(cls, path: Path = PROJECT_ROOT / 'artifacts' / 'mlp_quantized.pt'):
+    def load(cls, path: Path = PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_quantized.pt'):
         return cls(torch.load(path, map_location='cpu', weights_only=True))
 
     def infer(self, inputs) -> dict[str, np.ndarray]:
@@ -100,7 +100,7 @@ class IntegerMLP:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--checkpoint', type=Path, default=PROJECT_ROOT / 'artifacts' / 'mlp_quantized.pt')
+    parser.add_argument('--checkpoint', type=Path, default=PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_quantized.pt')
     parser.add_argument('--count', type=int, default=10)
     parser.add_argument('--output', type=Path, default=PROJECT_ROOT / 'docs' / 'golden_samples.json')
     args = parser.parse_args()

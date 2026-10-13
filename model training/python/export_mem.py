@@ -103,7 +103,7 @@ def load_exports(directory: Path) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--checkpoint', type=Path, default=PROJECT_ROOT / 'artifacts' / 'mlp_quantized.pt')
+    parser.add_argument('--checkpoint', type=Path, default=PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_quantized.pt')
     parser.add_argument('--output-dir', type=Path, default=PROJECT_ROOT / 'mem')
     parser.add_argument('--accuracy-report', type=Path, default=PROJECT_ROOT / 'docs' / 'quantized_accuracy.json')
     parser.add_argument('--report', type=Path, default=PROJECT_ROOT / 'docs' / 'export_verification.json')

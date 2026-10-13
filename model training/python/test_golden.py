@@ -31,7 +31,7 @@ def scalar_dense(images, weights, biases, shift, relu):
 class GoldenTestbench(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.artifact = torch.load(PROJECT_ROOT / 'artifacts' / 'mlp_quantized.pt', weights_only=True)
+        cls.artifact = torch.load(PROJECT_ROOT / 'model training' / 'artifacts' / 'mlp_quantized.pt', weights_only=True)
 
     def test_shift_saturation_and_relu_boundaries(self):
         acc = np.array([[7, -7, 65536, -65538, 0]], dtype=np.int64)

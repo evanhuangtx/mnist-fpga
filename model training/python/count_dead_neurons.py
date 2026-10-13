@@ -41,7 +41,7 @@ def measure_hidden(model: MNISTMLP, loader: DataLoader) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--checkpoint", type=Path, default=PROJECT_ROOT / "artifacts" / "mlp_float.pt")
+    parser.add_argument("--checkpoint", type=Path, default=PROJECT_ROOT / "model training" / "artifacts" / "mlp_float.pt")
     parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "docs" / "dead_neurons.json")
     parser.add_argument("--batch-size", type=int, default=1024)
     parser.add_argument("--threads", type=int, default=4)

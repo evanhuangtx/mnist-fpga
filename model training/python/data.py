@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 from torch.utils.data import TensorDataset
 from torchvision.datasets import MNIST
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = PROJECT_ROOT / "data"
 
 

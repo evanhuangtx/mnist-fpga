@@ -69,7 +69,7 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--max-shift", type=int, choices=(0, 1, 2), default=2)
-    parser.add_argument("--checkpoint", type=Path, default=PROJECT_ROOT / "artifacts" / "mlp_float.pt")
+    parser.add_argument("--checkpoint", type=Path, default=PROJECT_ROOT / "model training" / "artifacts" / "mlp_float.pt")
     parser.add_argument("--results", type=Path, default=PROJECT_ROOT / "docs" / "training_results.json")
     args = parser.parse_args()
     if args.epochs < 1 or args.batch_size < 1 or args.lr <= 0 or args.threads < 1:

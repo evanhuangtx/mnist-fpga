@@ -41,14 +41,14 @@ Use Python 3.12. From the repository root in PowerShell:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r "model training\requirements.txt"
 .\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe python\data.py
+.\.venv\Scripts\python.exe "model training\python\data.py"
 ```
 
 The first data-loader run downloads MNIST into `data/MNIST/`; later runs reuse
 it. The supplied local environment uses Python 3.12.14 and CPU PyTorch.
-`requirements.txt` pins the installed packages and official PyTorch CPU index.
+`model training/requirements.txt` pins the installed packages and official PyTorch CPU index.
 Calling the environment's Python directly makes activation optional.
 
 ## Verify the supplied artifacts
@@ -57,8 +57,8 @@ The trained checkpoints, hardware parameters, and expected vectors are included,
 so training is unnecessary for verification. After loading MNIST:
 
 ```powershell
-.\.venv\Scripts\python.exe python\check_arithmetic_rules.py
-.\.venv\Scripts\python.exe python\verify_phase1.py
+.\.venv\Scripts\python.exe "model training\python\check_arithmetic_rules.py"
+.\.venv\Scripts\python.exe "model training\python\verify_phase1.py"
 ```
 
 The final verifier runs all 34 tests and checks checkpoint provenance and hashes
@@ -66,9 +66,9 @@ of 23 parameter/vector files against their full-evaluation reports. Full
 10,000-image inference and export checks can be repeated with:
 
 ```powershell
-.\.venv\Scripts\python.exe python\evaluate_quantized.py
-.\.venv\Scripts\python.exe python\export_mem.py
-.\.venv\Scripts\python.exe python\export_vectors.py
+.\.venv\Scripts\python.exe "model training\python\evaluate_quantized.py"
+.\.venv\Scripts\python.exe "model training\python\export_mem.py"
+.\.venv\Scripts\python.exe "model training\python\export_vectors.py"
 ```
 
 Reports go to `docs/`. Vector export verifies every generated file and recomputes
@@ -79,15 +79,15 @@ all layer outputs from the reloaded input images.
 Run the following commands in order from the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe python\data.py
-.\.venv\Scripts\python.exe python\train.py
-.\.venv\Scripts\python.exe python\count_dead_neurons.py
-.\.venv\Scripts\python.exe python\quantize.py
-.\.venv\Scripts\python.exe python\golden.py
-.\.venv\Scripts\python.exe python\evaluate_quantized.py
-.\.venv\Scripts\python.exe python\export_mem.py
-.\.venv\Scripts\python.exe python\export_vectors.py
-.\.venv\Scripts\python.exe python\verify_phase1.py
+.\.venv\Scripts\python.exe "model training\python\data.py"
+.\.venv\Scripts\python.exe "model training\python\train.py"
+.\.venv\Scripts\python.exe "model training\python\count_dead_neurons.py"
+.\.venv\Scripts\python.exe "model training\python\quantize.py"
+.\.venv\Scripts\python.exe "model training\python\golden.py"
+.\.venv\Scripts\python.exe "model training\python\evaluate_quantized.py"
+.\.venv\Scripts\python.exe "model training\python\export_mem.py"
+.\.venv\Scripts\python.exe "model training\python\export_vectors.py"
+.\.venv\Scripts\python.exe "model training\python\verify_phase1.py"
 ```
 
 Training uses seed 42, 40 epochs, batch size 128, Adam, and a cosine learning
@@ -122,14 +122,14 @@ bias clipping. Both layers' bounds cover every intermediate MAC sum.
 
 | Location | Contents |
 |---|---|
-| `python/data.py` | MNIST loading, thresholding, and sample preview |
-| `python/model.py`, `python/train.py` | Float MLP and reproducible training |
-| `python/count_dead_neurons.py` | Dataset-level hidden-neuron activity |
-| `python/quantize.py`, `python/golden.py` | Integer parameters and reference inference |
-| `python/evaluate_quantized.py` | Full float/integer accuracy and overflow checks |
-| `python/export_mem.py`, `python/export_vectors.py` | Hardware files and verified RTL vectors |
-| `python/test_*.py`, `python/verify_phase1.py` | Testbenches and final verification |
-| `artifacts/` | Saved float and integer checkpoints; baseline checkpoint |
+| `model training/python/data.py` | MNIST loading, thresholding, and sample preview |
+| `model training/python/model.py`, `model training/python/train.py` | Float MLP and reproducible training |
+| `model training/python/count_dead_neurons.py` | Dataset-level hidden-neuron activity |
+| `model training/python/quantize.py`, `model training/python/golden.py` | Integer parameters and reference inference |
+| `model training/python/evaluate_quantized.py` | Full float/integer accuracy and overflow checks |
+| `model training/python/export_mem.py`, `model training/python/export_vectors.py` | Hardware files and verified RTL vectors |
+| `model training/python/test_*.py`, `model training/python/verify_phase1.py` | Testbenches and final verification |
+| `model training/artifacts/` | Saved float and integer checkpoints; baseline checkpoint |
 | `docs/` | Specification, arithmetic contract, results, logs, preview, verification |
 | `mem/` | Weights, biases, shifts, layer table, and configuration |
 | `mem/vectors/` | Input and expected-output sets for 10 / 1,000 / 10,000 images |
